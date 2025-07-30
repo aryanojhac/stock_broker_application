@@ -6,7 +6,7 @@ import (
 	"authentication/repo"
 )
 
-func RegisterUser(user models.User) error { //I will hash the password in this function
+func RegisterUser(user models.SignUpModel) error { //I will hash the password in this function
 	// Check if username already exists
 	exists, err := repo.IsUsernameTaken(user.UserName)
 	if err != nil {
@@ -18,8 +18,4 @@ func RegisterUser(user models.User) error { //I will hash the password in this f
 
 	// Create user if not exists
 	return repo.CreateUser(user)
-}
-
-func LoginUser(username, password string) (bool, error) { //I will compare hashes here
-	return repo.ValidateUser(username, password)
 }

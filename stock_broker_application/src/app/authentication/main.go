@@ -1,9 +1,10 @@
 package main
 
 import (
+	"authentication/constants"
+	"authentication/router"
 	"authentication/utils"
 	"authentication/utils/db"
-	"authentication/router"
 )
 
 func main() {
@@ -15,5 +16,5 @@ func main() {
 
 	utils.InfoLogger.Println("Starting server...")
 	r := router.SetupRouter()
-	r.Run(":" + utils.AppConfig.ServerPort)
+	r.Run(constants.PORT)
 }
