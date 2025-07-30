@@ -22,7 +22,7 @@ func SignUp(c *gin.Context) {
 				return
 			}
 		}
-		c.JSON(http.StatusOK, gin.H{"message": "all users registered successfully"})
+		c.JSON(http.StatusOK, gin.H{"message": constants.MsgRegistered})
 		return
 	}
 	// if err := c.ShouldBindJSON(&single); err == nil {
@@ -61,5 +61,5 @@ func SignIn(c *gin.Context) {
 	}
 
 	// Successful login
-	c.JSON(http.StatusOK, gin.H{"message": "logged in successfully"})
+	c.JSON(http.StatusOK, gin.H{"message": constants.MsgLoggedIn})
 }
