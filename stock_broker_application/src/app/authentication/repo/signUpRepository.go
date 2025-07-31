@@ -24,3 +24,14 @@ func IsUsernameTaken(username string) (bool, error) { // To check if the usernam
 	}
 	return exists, nil
 }
+
+func IsEmailExists(email string) (bool, error) {
+	var exists bool
+	query := `SELECT EXISTS(SELECT 1 FROM users WHERE email=$1)`
+	err := db.DB.QueryRow(query, email).Scan(&exists)
+	if err != nil {
+		utils.ErrorLogger.Println("IsEmailExists error:", err)
+		return false, err
+	}
+	return exists, nil
+}
