@@ -12,4 +12,5 @@ var (
 	ErrRegistration    = errors.New("registration failed")
 	ErrUserNotFound    = errors.New("user not found")
 	ErrInvalidPassword = errors.New("invalid password")
+	ErrInvalidBody     = errors.New("all fields are required")
 )
