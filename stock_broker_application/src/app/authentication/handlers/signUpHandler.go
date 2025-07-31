@@ -11,31 +11,32 @@ import (
 
 // SignUp handles multiple users in a single request
 func SignUp(c *gin.Context) {
-
 	var multiple []models.SignUpModel
 
-	if err := c.ShouldBindJSON(&multiple); err == nil {
-		for _, user := range multiple {
-			if err := service.RegisterUser(user); err != nil {
-				c.JSON(http.StatusInternalServerError, gin.H{
-					"error": err.Error(), //Using actual error from service
-				})
-				return
-			}
-		}
-		c.JSON(http.StatusOK, gin.H{"message": constants.MsgRegistered})
+	// Binding the JSON input
+	if err := c.ShouldBindJSON(&multiple); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": constants.ErrInvalidRequest.Error(), // Proper error if JSON is malformed
+		})
 		return
 	}
 
-	// var single models.User
-	// if err := c.ShouldBindJSON(&single); err == nil {
-	// 	if err := service.RegisterUser(single); err != nil {
-	// 		c.JSON(http.StatusInternalServerError, gin.H{"error": "registration failed"})
-	// 		return
-	// 	}
-	// 	c.JSON(http.StatusOK, gin.H{"message": "user registered successfully"})
-	// 	return
-	// }
+	for _, user := range multiple {
+		// Manually validating for required fields
+		if user.UserName == "" || user.Password == "" || user.Email == "" || user.PhoneNumber == "" || user.PanCard == "" {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "all fields are required"})
+			return
+		}
 
-	c.JSON(http.StatusBadRequest, gin.H{"error": constants.ErrInvalidRequest})
+		// Calling service layer to register the user
+		if err := service.RegisterUser(user); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"error": err.Error(), // Return the actual error from service/repo
+			})
+			return
+		}
+	}
+
+	// Success response
+	c.JSON(http.StatusOK, gin.H{"message": constants.MsgRegistered})
 }

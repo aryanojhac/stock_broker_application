@@ -7,7 +7,7 @@ import (
 )
 
 func RegisterUser(user models.SignUpModel) error { //I will hash the password in this function
-	
+
 	// Check if username already exists
 	exists, err := repo.IsUsernameTaken(user.UserName)
 	if err != nil {
