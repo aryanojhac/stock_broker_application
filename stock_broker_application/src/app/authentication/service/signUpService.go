@@ -7,11 +7,6 @@ import (
 )
 
 func RegisterUser(user models.SignUpModel) error { //I will hash the password in this function
-
-	// Manually check all fields for empty values
-	if user.UserName == "" || user.Password == "" || user.Email == "" || user.PhoneNumber == "" || user.PanCard == "" {
-		return constants.ErrInvalidBody
-	}
 	
 	// Check if username already exists
 	exists, err := repo.IsUsernameTaken(user.UserName)
