@@ -1,9 +1,9 @@
 package service
 
 import (
+	"authentication/constants"
 	"authentication/models"
 	"authentication/repo"
-	"authentication/constants"
 )
 
 func RegisterUser(user models.SignUpModel) error { //I will hash the password in this function
@@ -16,9 +16,9 @@ func RegisterUser(user models.SignUpModel) error { //I will hash the password in
 		return constants.ErrUsernameTaken
 	}
 
-// Check if email already exists
+	// Check if email already exists
 	emailExists, err := repo.IsEmailExists(user.Email)
-	if err!= nil {
+	if err != nil {
 		return constants.ErrCheckEmail
 	}
 	if emailExists {

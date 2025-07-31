@@ -1,14 +1,15 @@
 package handlers
 
 import (
-	"net/http"
-	"github.com/gin-gonic/gin"
+	"authentication/constants"
 	"authentication/models"
 	"authentication/service"
-	"authentication/constants"
+	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
-func SignIn(c *gin.Context){
+func SignIn(c *gin.Context) {
 	var creds models.SignInModel
 
 	// Binding JSON for login credentials

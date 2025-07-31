@@ -1,10 +1,11 @@
 package db
 
 import (
+	"authentication/utils"
 	"database/sql"
 	"fmt"
 	"log"
-	"authentication/utils"
+
 	_ "github.com/lib/pq"
 )
 

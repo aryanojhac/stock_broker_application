@@ -11,7 +11,7 @@ import (
 
 // SignUp handles multiple users in a single request
 func SignUp(c *gin.Context) {
-	// var single models.User
+
 	var multiple []models.SignUpModel
 
 	if err := c.ShouldBindJSON(&multiple); err == nil {
@@ -26,6 +26,8 @@ func SignUp(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"message": constants.MsgRegistered})
 		return
 	}
+
+	// var single models.User
 	// if err := c.ShouldBindJSON(&single); err == nil {
 	// 	if err := service.RegisterUser(single); err != nil {
 	// 		c.JSON(http.StatusInternalServerError, gin.H{"error": "registration failed"})

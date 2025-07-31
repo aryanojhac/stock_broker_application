@@ -1,9 +1,10 @@
 package router
 
 import (
-	"github.com/gin-gonic/gin"
-	"authentication/handlers"
 	"authentication/constants"
+	"authentication/handlers"
+
+	"github.com/gin-gonic/gin"
 )
 
 func SetupRouter() *gin.Engine {

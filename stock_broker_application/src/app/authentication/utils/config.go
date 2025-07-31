@@ -2,6 +2,7 @@ package utils
 
 import (
 	"log"
+
 	"github.com/spf13/viper"
 )
 
