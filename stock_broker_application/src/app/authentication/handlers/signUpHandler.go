@@ -21,8 +21,9 @@ func SignUp(c *gin.Context) {
 		return
 	}
 
+	// Manually validating for required fields
 	for _, user := range multiple {
-		// Manually validating for required fields
+		
 		if user.UserName == "" || user.Password == "" || user.Email == "" || user.PhoneNumber == "" || user.PanCard == "" {
 			c.JSON(http.StatusBadRequest, gin.H{"error": "all fields are required"})
 			return
